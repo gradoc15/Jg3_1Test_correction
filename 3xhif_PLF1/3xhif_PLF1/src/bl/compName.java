@@ -5,11 +5,23 @@
  */
 package bl;
 
+import java.util.Comparator;
+
 /**
  *
  * @author User
  */
-public class compName
+public class compName implements Comparator<WetterStation>
 {
+
+    @Override
+    public int compare(WetterStation o1, WetterStation o2)
+    {
+        if(o1.getPalce().hashCode() > o2.getPalce().hashCode())
+            return 1;
+        else if(o1.getPalce().hashCode() < o2.getPalce().hashCode())
+            return -1;
+        return 0;
+    }
     
 }

@@ -2,6 +2,9 @@ package gui;
 
 import bl.TableRenderer;
 import bl.WetterBl;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,6 +39,9 @@ public class WeatherGUI extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         miSetTemp = new javax.swing.JMenuItem();
         miSetHum = new javax.swing.JMenuItem();
+        muSLvl = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,12 +87,50 @@ public class WeatherGUI extends javax.swing.JFrame {
         jMenu2.setText("Values");
 
         miSetTemp.setText("Set Temperature");
+        miSetTemp.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                miSetTempActionPerformed(evt);
+            }
+        });
         jMenu2.add(miSetTemp);
 
         miSetHum.setText("Set Humidity");
+        miSetHum.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                miSetHumActionPerformed(evt);
+            }
+        });
         jMenu2.add(miSetHum);
 
         jMenuBar1.add(jMenu2);
+
+        muSLvl.setText("SealLvl");
+
+        jMenuItem1.setText("hide");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        muSLvl.add(jMenuItem1);
+
+        jMenuItem2.setText("show");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        muSLvl.add(jMenuItem2);
+
+        jMenuBar1.add(muSLvl);
 
         setJMenuBar(jMenuBar1);
 
@@ -121,6 +165,43 @@ public class WeatherGUI extends javax.swing.JFrame {
         for(int i = idx.length-1; i >= 0; i--)
             bl.del(idx[i]);
     }//GEN-LAST:event_miRemoveActionPerformed
+
+    private void miSetTempActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_miSetTempActionPerformed
+    {//GEN-HEADEREND:event_miSetTempActionPerformed
+        bl.WetterStation ws = (bl.WetterStation)bl.getValueAt(tabWheater.getSelectedRow(), 0);
+        
+        try
+        {
+            ws.setTemp(Integer.parseInt(JOptionPane.showInputDialog("Change Temp")));
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_miSetTempActionPerformed
+
+    private void miSetHumActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_miSetHumActionPerformed
+    {//GEN-HEADEREND:event_miSetHumActionPerformed
+         bl.WetterStation ws = (bl.WetterStation)bl.getValueAt(tabWheater.getSelectedRow(), 0);
+        
+        try
+        {
+            ws.setHum(Integer.parseInt(JOptionPane.showInputDialog("Change Hum")));
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_miSetHumActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem1ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem1ActionPerformed
+       bl.setHide(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem2ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem2ActionPerformed
+       
+        bl.setHide(false);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,11 +243,14 @@ public class WeatherGUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem miAdd;
     private javax.swing.JMenuItem miRemove;
     private javax.swing.JMenuItem miSetHum;
     private javax.swing.JMenuItem miSetTemp;
+    private javax.swing.JMenu muSLvl;
     private javax.swing.JTable tabWheater;
     // End of variables declaration//GEN-END:variables
 

@@ -23,16 +23,35 @@ public class TableRenderer implements TableCellRenderer
     {
         JLabel l = new JLabel();
         l.setOpaque(true);
-        
+
         WetterStation ws = (WetterStation) value;
-        
-        switch(column)
+
+        if (table.getColumnCount() == 4)
         {
-            case 0: l.setText(ws.getPalce()); break;
-            case 1: l.setText(""+ws.getSeaLvl()); break;
-            case 2: l.setText(""+ws.getTemp()); break;
-            case 3: l.setText(""+ws.getHumidity()); break;
-            default: l.setText("ERROR");
+            switch (column)
+            {
+                case 0: l.setText(ws.getPalce());
+                    break;
+                case 1: l.setText("" + ws.getSeaLvl());
+                    break;
+                case 2: l.setText("" + ws.getTemp());
+                    break;
+                case 3: l.setText("" + ws.getHumidity());
+                    break;
+                default: l.setText("ERROR");
+            }
+        } else
+        {
+            switch (column)
+            {
+                case 0: l.setText(ws.getPalce());
+                    break;
+                case 1: l.setText("" + ws.getTemp());
+                    break;
+                case 2: l.setText("" + ws.getHumidity());
+                    break;
+                default: l.setText("ERROR");
+            }
         }
         
         if(ws.getTemp() > 25 && ws.getHumidity() <= 20)
