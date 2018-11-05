@@ -24,7 +24,8 @@ public class WeatherGUI extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabWheater = new javax.swing.JTable();
@@ -39,13 +40,15 @@ public class WeatherGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tabWheater.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {},
                 {},
                 {},
                 {}
             },
-            new String [] {
+            new String []
+            {
 
             }
         ));
@@ -54,14 +57,23 @@ public class WeatherGUI extends javax.swing.JFrame {
         jMenu1.setText("Stations");
 
         miAdd.setText("Add Weather Station");
-        miAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        miAdd.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 miAddActionPerformed(evt);
             }
         });
         jMenu1.add(miAdd);
 
         miRemove.setText("Remove Weather Station");
+        miRemove.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                miRemoveActionPerformed(evt);
+            }
+        });
         jMenu1.add(miRemove);
 
         jMenuBar1.add(jMenu1);
@@ -95,7 +107,20 @@ public class WeatherGUI extends javax.swing.JFrame {
     private void miAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddActionPerformed
         WeatherDlg2 dlg = new WeatherDlg2(this, true);
         dlg.setVisible(true);
+        
+        if(dlg.isOkay())
+        {
+            bl.add(dlg.getWs());
+        }
     }//GEN-LAST:event_miAddActionPerformed
+
+    private void miRemoveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_miRemoveActionPerformed
+    {//GEN-HEADEREND:event_miRemoveActionPerformed
+        int idx[] = tabWheater.getSelectedRows();
+        
+        for(int i = idx.length-1; i >= 0; i--)
+            bl.del(idx[i]);
+    }//GEN-LAST:event_miRemoveActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,11 @@
  */
 package gui;
 
+import bl.WetterStation;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lb
@@ -14,6 +19,10 @@ public class WeatherDlg2 extends javax.swing.JDialog {
     /**
      * Creates new form WeatherDlg2
      */
+    private boolean okay = false;
+    private bl.WetterStation ws = null;
+    
+    
     public WeatherDlg2(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -26,7 +35,8 @@ public class WeatherDlg2 extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jPanel2 = new javax.swing.JPanel();
         btOk = new javax.swing.JButton();
@@ -46,9 +56,23 @@ public class WeatherDlg2 extends javax.swing.JDialog {
         jPanel2.setLayout(new java.awt.GridLayout(1, 2));
 
         btOk.setText("OK");
+        btOk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btOkActionPerformed(evt);
+            }
+        });
         jPanel2.add(btOk);
 
         btCancel.setText("Cancel");
+        btCancel.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btCancelActionPerformed(evt);
+            }
+        });
         jPanel2.add(btCancel);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
@@ -84,6 +108,36 @@ public class WeatherDlg2 extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btOkActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btOkActionPerformed
+    {//GEN-HEADEREND:event_btOkActionPerformed
+        try
+        {
+            ws = new bl.WetterStation(tfPlace.getText(),Integer.parseInt(tfSeaLevel.getText()), Float.parseFloat(tfTemperature.getText()), Integer.parseInt(tfHumidity.getText()));
+            okay = true;
+            this.dispose();
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        
+    }//GEN-LAST:event_btOkActionPerformed
+
+    private void btCancelActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btCancelActionPerformed
+    {//GEN-HEADEREND:event_btCancelActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btCancelActionPerformed
+
+    public boolean isOkay()
+    {
+        return okay;
+    }
+
+    public WetterStation getWs()
+    {
+        return ws;
+    }
+
+        
     /**
      * @param args the command line arguments
      */
